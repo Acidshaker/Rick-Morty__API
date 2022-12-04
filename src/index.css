@@ -482,3 +482,7 @@ body,
   transform: translateY(-1px);
   color: #bfde3f;
 }
+
+.media__container {
+  display: none;
+}
