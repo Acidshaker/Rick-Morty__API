@@ -31,7 +31,7 @@ function App() {
 
   const getDataDimension = (idDimension) => {
     setLoader(true)
-    if (idDimension) {
+    if (idDimension && idDimension > 0 && idDimension <= 126) {
       const URL = `https://rickandmortyapi.com/api/location/${idDimension}`
       axios.get(URL)
         .then((res) => {
