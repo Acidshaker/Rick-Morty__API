@@ -17,8 +17,17 @@ const LocationFilter = ({ locationName, getNewLocation }) => {
 
   }, [locationName])
 
+  // const includeLocation = () => {
+  //   console.log(locationsOptions?.some(locationOption => locationOption.name === locationName))
+  // }
+
+  // includeLocation()
+
   const hiddenList = () => {
     if (!locationName) {
+      return "hidden__list"
+    }
+    else if ((locationsOptions?.some(locationOption => locationOption.name === locationName))) {
       return "hidden__list"
     }
     else {

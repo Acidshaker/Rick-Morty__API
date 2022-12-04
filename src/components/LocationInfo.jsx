@@ -47,10 +47,10 @@ const LocationInfo = ({ dimension, showError, getDataDimension }) => {
               </div>
             </div>
             <ul className='list__info'>
-              <li><span>Type: </span>{dimension?.type}</li>
-              <li><span>Id: </span>{dimension?.id}</li>
-              <li><span>Dimension: </span>{dimension?.dimension}</li>
-              <li><span>Population: </span>{dimension?.residents.length}</li>
+              <li><span className='list__param'>Type: </span>{dimension?.type}</li>
+              <li><span className='list__param'>Id: </span>{dimension?.id}</li>
+              <li><span className='list__param'>Dimension: </span>{dimension?.dimension}</li>
+              <li><span className='list__param'>Population: </span>{dimension?.residents.length}</li>
             </ul>
           </>
         )
