@@ -17,11 +17,14 @@ const LocationFilter = ({ locationName, getNewLocation }) => {
 
   }, [locationName])
 
-  // const includeLocation = () => {
-  //   console.log(locationsOptions?.some(locationOption => locationOption.name === locationName))
-  // }
-
-  // includeLocation()
+  const classValue = () => {
+    if (locationName) {
+      return "animation__list"
+    }
+    else {
+      return ""
+    }
+  }
 
   const hiddenList = () => {
     if (!locationName) {
@@ -40,7 +43,7 @@ const LocationFilter = ({ locationName, getNewLocation }) => {
       <ul className={`filter__list ${hiddenList()}`}>
         {
           locationsOptions?.map(locationOption => (
-            <li key={locationOption.url} onClick={
+            <li className={classValue()} key={locationOption.url} onClick={
               () => {
                 getNewLocation(locationOption.url, locationOption.name)
                 setLocationsOptions()

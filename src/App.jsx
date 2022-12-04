@@ -22,6 +22,10 @@ function App() {
   const [newUrl, setnewUrl] = useState()
   // Estado para cargar el loader
   const [loader, setLoader] = useState()
+  // Estado para cargar audio
+  const [currentlySong, setCurrentlySong] = useState(0)
+  // Estado para obtener la cancion actual
+  const [songName, setSongName] = useState("Evil Morty Song")
 
   // funcion para obtener un numero aleatorio por defecto del 1-126
 
@@ -48,9 +52,6 @@ function App() {
     }
     else {
       setshowError(true)
-      // setTimeout(() => {
-      //   setshowError(false)
-      // }, 1000)
     }
   }
 
@@ -106,9 +107,69 @@ function App() {
   }
 
 
+  const showSongCurrently = () => {
+    if (currentlySong == 0) {
+      setSongName("Evil Morty Song")
+    }
+    if (currentlySong == 1) {
+      setSongName("Hombres lunares")
+    }
+    if (currentlySong == 2) {
+      setSongName("Rick & Morty Intro")
+    }
+  }
+  useEffect(() => {
+    showSongCurrently()
+  }, [currentlySong])
+
+  const arrayMusic = [
+    './src/assets/media/for-the-damaged-coda-evil-morty-theme-song-from-rick-and-morty.mp3',
+    './src/assets/media/hombres-lunares-version-oficial-completo-feat-pedo-y-morty-rick-morty-adult-swim.mp3',
+    './src/assets/media/rick-y-morty-intro-en-espanol-hbo-max.mp3'
+  ]
+
+  const mediaPlay = document.querySelector(".media__play")
+  const mediaPause = document.querySelector(".media__pause")
+  const mySong = new Audio(arrayMusic[currentlySong])
 
 
-  //bg-img${getRandomNumber(5)}.jpg
+
+  const handleNextPlay = () => {
+    if (currentlySong < 2) {
+      setCurrentlySong(currentlySong + 1)
+    }
+    else {
+      setCurrentlySong(0)
+    }
+    mySong.pause()
+    mediaPlay.classList.remove("media__hidden")
+    mediaPause.classList.add("media__hidden")
+  }
+
+  const handlePrevPlay = () => {
+    if (currentlySong < 2 && currentlySong > 0) {
+      setCurrentlySong(currentlySong - 1)
+    }
+    else {
+      setCurrentlySong(2)
+    }
+    mySong.pause()
+    mediaPlay.classList.remove("media__hidden")
+    mediaPause.classList.add("media__hidden")
+  }
+
+
+  const handleMediaPlay = () => {
+    mediaPlay.classList.add("media__hidden")
+    mediaPause.classList.remove("media__hidden")
+    mySong.play()
+  }
+
+  const handleMediaStop = () => {
+    mediaPlay.classList.remove("media__hidden")
+    mediaPause.classList.add("media__hidden")
+    mySong.pause()
+  }
 
   return (
     <div className="App">
@@ -118,6 +179,16 @@ function App() {
             <div className='header__img'>
               <img src="https://i.postimg.cc/sgqJvw7w/image3.jpg" alt="Background image Rick & morty" />
             </div>
+            <div className='media__container'>
+              <div className='media__btn--container'>
+                <i className='bx bx-skip-previous media__prev' onClick={handlePrevPlay} ></i>
+                <i className='bx bx-play media__play' onClick={handleMediaPlay} ></i>
+                <i className='bx bx-pause media__pause media__hidden' onClick={handleMediaStop} ></i>
+                <i className='bx bx-skip-next media__next' onClick={handleNextPlay} ></i>
+              </div>
+              <p className='song__name' >{songName}</p>
+            </div>
+            <audio className='audio__tag' src={arrayMusic[currentlySong]} type="audio/mp3"></audio>
             <div className='form__container'>
               <form className='form__flex' onSubmit={handlesubmit} >
                 <div className='filter__container'>
