@@ -54,6 +54,7 @@ body,
   display: flex;
   flex-direction: column;
   justify-content: center;
+  row-gap: 1.5rem;
   align-items: center;
   max-width: 250px;
   height: 100%;
