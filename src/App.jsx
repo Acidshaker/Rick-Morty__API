@@ -116,7 +116,7 @@ function App() {
         dimension ? (
           <>
             <div className='header__img'>
-              <img src="./public/img/image3.jpg" alt="Background image Rick & morty" />
+              <img src="./public/image3.jpg" alt="Background image Rick & morty" />
             </div>
             <div className='form__container'>
               <form className='form__flex' onSubmit={handlesubmit} >
