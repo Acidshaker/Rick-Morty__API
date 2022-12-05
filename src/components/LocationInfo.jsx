@@ -29,7 +29,6 @@ const LocationInfo = ({ dimension, showError, getDataDimension }) => {
     }
   }
 
-  console.log(dimension)
   return (
     <article className='dimension__info'>
       {
