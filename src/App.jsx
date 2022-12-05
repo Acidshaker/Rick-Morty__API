@@ -123,9 +123,9 @@ function App() {
   }, [currentlySong])
 
   const arrayMusic = [
-    '/src/assets/media/for-the-damaged-coda-evil-morty-theme-song-from-rick-and-morty.mp3',
-    '/src/assets/media/hombres-lunares-version-oficial-completo-feat-pedo-y-morty-rick-morty-adult-swim.mp3',
-    '/src/assets/media/rick-y-morty-intro-en-espanol-hbo-max.mp3'
+    '/assets/media/for-the-damaged-coda-evil-morty-theme-song-from-rick-and-morty.mp3',
+    '/assets/media/hombres-lunares-version-oficial-completo-feat-pedo-y-morty-rick-morty-adult-swim.mp3',
+    '/assets/media/rick-y-morty-intro-en-espanol-hbo-max.mp3'
   ]
 
   const mediaPlay = document.querySelector(".media__play")
