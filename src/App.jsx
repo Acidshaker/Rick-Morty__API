@@ -70,24 +70,36 @@ function App() {
     setnewUrl(url)
   }
 
+  // funcion para poner mayuscula la primer letra de cualquier palabra
+
+  const firstUpperLetter = (str) => {
+    const firstLetter = str.charAt(0)
+    const firstLetterCap = firstLetter.toUpperCase()
+    const remainingLetters = str.slice(1)
+    const capitalizedWord = firstLetterCap + remainingLetters
+    return capitalizedWord
+  }
+
 
   // funcion que obtiene el valor del input y lo pasa como parametro para hacer una peticion a la API
 
   const handlesubmit = (event) => {
     event.preventDefault()
     setshowError(false)
-    const URL = `https://rickandmortyapi.com/api/location?name=${event.target.searchValue.value}`
-    axios.get(URL)
-      .then((res) => {
-        setnewUrl(res.data.results[0].url)
-      })
-      .catch((err) => {
-        console.log(err)
-        setshowError(true)
-      })
+
 
     const searchValue = event.target.searchValue.value
     if (isNaN(+searchValue)) {
+      const URL = `https://rickandmortyapi.com/api/location?name=${firstUpperLetter(searchValue)}`
+      axios.get(URL)
+        .then((res) => {
+          setnewUrl(res.data.results[0].url)
+        })
+        .catch((err) => {
+          console.log(err)
+          setshowError(true)
+        })
+
       axios.get(newUrl)
         .then((res) => {
           setLoader(true)
