@@ -331,6 +331,7 @@ body,
 }
 
 
+.error__container,
 .song__name,
 .list__info,
 .dimension__info--title,
@@ -522,4 +523,24 @@ body,
 .filter__list::-webkit-scrollbar-thumb {
   background-color: rgba(191, 222, 63, 0.73);
   border-radius: 10px;
+}
+
+.img__error {
+  animation: rotate 3s infinite
+}
+
+@keyframes rotate {
+
+  25% {
+    transform: rotate(-5deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
 }

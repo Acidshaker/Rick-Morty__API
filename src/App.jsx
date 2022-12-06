@@ -45,6 +45,7 @@ function App() {
           }, 3000)
         })
         .catch((err) => {
+          setshowError(true)
           console.log(err)
           console.log(err.response.data.error)
           console.log(err.response.data.status)
@@ -75,6 +76,16 @@ function App() {
   const handlesubmit = (event) => {
     event.preventDefault()
     setshowError(false)
+    const URL = `https://rickandmortyapi.com/api/location?name=${event.target.searchValue.value}`
+    axios.get(URL)
+      .then((res) => {
+        setnewUrl(res.data.results[0].url)
+      })
+      .catch((err) => {
+        console.log(err)
+        setshowError(true)
+      })
+
     const searchValue = event.target.searchValue.value
     if (isNaN(+searchValue)) {
       axios.get(newUrl)
@@ -87,8 +98,7 @@ function App() {
         })
         .catch((err) => {
           console.log(err)
-          console.log(err.response.data.error)
-          console.log(err.response.data.status)
+          setshowError(true)
         })
     }
     else {
@@ -128,11 +138,7 @@ function App() {
     'rick-y-morty-intro-en-espanol-hbo-max.mp3'
   ]
 
-  const mediaPlay = document.querySelector(".media__play")
-  const mediaPause = document.querySelector(".media__pause")
   const mySong = new Audio(arrayMusic[currentlySong])
-
-
 
   const handleNextPlay = (e) => {
     if (currentlySong < 2) {
@@ -142,12 +148,9 @@ function App() {
       setCurrentlySong(0)
     }
     mySong.pause()
-    // mediaPlay.classList.remove("media__hidden")
-    // mediaPause.classList.add("media__hidden")
     e.target.previousSibling.classList.add("media__hidden")
     e.target.previousSibling.previousSibling.classList.remove("media__hidden")
   }
-  // prev > play > pause > next
 
   const handlePrevPlay = (e) => {
     if (currentlySong < 2 && currentlySong > 0) {
@@ -157,8 +160,6 @@ function App() {
       setCurrentlySong(2)
     }
     mySong.pause()
-    // mediaPlay.classList.remove("media__hidden")
-    // mediaPause.classList.add("media__hidden")
     e.target.nextSibling.classList.remove("media__hidden")
     e.target.nextSibling.nextSibling.classList.add("media__hidden")
   }
@@ -211,7 +212,7 @@ function App() {
 
             <section className='cards__container'>
               {
-                loader ? <Loader /> : (dimension?.residents.length ? dimension?.residents.map(urlResident => <ResidentCard key={urlResident} urlResident={urlResident} />) : <NotPopulation />)
+                !showError ? loader ? <Loader /> : (dimension?.residents.length ? dimension?.residents.map(urlResident => <ResidentCard key={urlResident} urlResident={urlResident} />) : <NotPopulation />) : ""
               }
             </section>
           </>
