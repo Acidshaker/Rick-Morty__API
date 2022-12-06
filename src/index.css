@@ -193,6 +193,8 @@ body,
   border-bottom-right-radius: 10px;
   color: #FFFFFF;
   font-size: small;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
 .hidden__list {
@@ -483,6 +485,41 @@ body,
   color: #bfde3f;
 }
 
-/* .media__container {
-  display: none;
-} */
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-color: #bfde3f #062328;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: hsla(0, 14%, 22%, 0.73);
+  border: solid 1px black;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #bfde3f;
+  border-radius: 10px;
+}
+
+.filter__list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.filter__list::-webkit-scrollbar-track {
+  border: none;
+  border-bottom-right-radius: 10px;
+  background: hsla(0, 14%, 22%, 0.73);
+  border-left: solid .5px black;
+  border-bottom: solid .5px black;
+}
+
+.filter__list::-webkit-scrollbar-thumb {
+  background-color: rgba(191, 222, 63, 0.73);
+  border-radius: 10px;
+}

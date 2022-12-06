@@ -192,7 +192,7 @@ function App() {
             <div className='form__container'>
               <form className='form__flex' onSubmit={handlesubmit} >
                 <div className='filter__container'>
-                  <input id='searchValue' type="text" value={locationName} onChange={handleChangeInput} placeholder='search your dimension' className='input__search' />
+                  <input autoComplete='off' id='searchValue' type="text" value={locationName} onChange={handleChangeInput} placeholder='search your dimension' className='input__search' />
                   <LocationFilter locationName={locationName} getNewLocation={getNewLocation} />
                 </div>
                 <button className='btn__search' type='submit'>Search</button>
