@@ -134,7 +134,7 @@ function App() {
 
 
 
-  const handleNextPlay = () => {
+  const handleNextPlay = (e) => {
     if (currentlySong < 2) {
       setCurrentlySong(currentlySong + 1)
     }
@@ -142,11 +142,14 @@ function App() {
       setCurrentlySong(0)
     }
     mySong.pause()
-    mediaPlay.classList.remove("media__hidden")
-    mediaPause.classList.add("media__hidden")
+    // mediaPlay.classList.remove("media__hidden")
+    // mediaPause.classList.add("media__hidden")
+    e.target.previousSibling.classList.add("media__hidden")
+    e.target.previousSibling.previousSibling.classList.remove("media__hidden")
   }
+  // prev > play > pause > next
 
-  const handlePrevPlay = () => {
+  const handlePrevPlay = (e) => {
     if (currentlySong < 2 && currentlySong > 0) {
       setCurrentlySong(currentlySong - 1)
     }
@@ -154,22 +157,27 @@ function App() {
       setCurrentlySong(2)
     }
     mySong.pause()
-    mediaPlay.classList.remove("media__hidden")
-    mediaPause.classList.add("media__hidden")
+    // mediaPlay.classList.remove("media__hidden")
+    // mediaPause.classList.add("media__hidden")
+    e.target.nextSibling.classList.remove("media__hidden")
+    e.target.nextSibling.nextSibling.classList.add("media__hidden")
   }
 
 
-  const handleMediaPlay = () => {
-    mediaPlay.classList.add("media__hidden")
-    mediaPause.classList.remove("media__hidden")
+  const handleMediaPlay = (e) => {
     mySong.play()
+    e.target.classList.add("media__hidden")
+    e.target.nextSibling.classList.remove("media__hidden")
   }
 
-  const handleMediaStop = () => {
-    mediaPlay.classList.remove("media__hidden")
-    mediaPause.classList.add("media__hidden")
+  const handleMediaStop = (e) => {
     mySong.pause()
+    e.target.classList.add("media__hidden")
+    e.target.previousSibling.classList.remove("media__hidden")
+
   }
+
+
 
   return (
     <div className="App">
