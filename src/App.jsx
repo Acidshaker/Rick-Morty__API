@@ -162,6 +162,7 @@ function App() {
     mySong.pause()
     e.target.previousSibling.classList.add("media__hidden")
     e.target.previousSibling.previousSibling.classList.remove("media__hidden")
+    e.target.parentNode.parentNode.classList.remove("music__active")
   }
 
   const handlePrevPlay = (e) => {
@@ -174,6 +175,7 @@ function App() {
     mySong.pause()
     e.target.nextSibling.classList.remove("media__hidden")
     e.target.nextSibling.nextSibling.classList.add("media__hidden")
+    e.target.parentNode.parentNode.classList.remove("music__active")
   }
 
 
@@ -181,12 +183,14 @@ function App() {
     mySong.play()
     e.target.classList.add("media__hidden")
     e.target.nextSibling.classList.remove("media__hidden")
+    e.target.parentNode.parentNode.classList.add("music__active")
   }
 
   const handleMediaStop = (e) => {
     mySong.pause()
     e.target.classList.add("media__hidden")
     e.target.previousSibling.classList.remove("media__hidden")
+    e.target.parentNode.parentNode.classList.remove("music__active")
 
   }
 
@@ -207,7 +211,9 @@ function App() {
                 <i className='bx bx-pause media__pause media__hidden' onClick={handleMediaStop} ></i>
                 <i className='bx bx-skip-next media__next' onClick={handleNextPlay} ></i>
               </div>
-              <p className='song__name' >{songName}</p>
+              <div className='song__name--container'>
+                <p className='song__name' >{songName}</p>
+              </div>
             </div>
             <audio className='audio__tag' src={arrayMusic[currentlySong]} type="audio/mp3"></audio>
             <div className='form__container'>
