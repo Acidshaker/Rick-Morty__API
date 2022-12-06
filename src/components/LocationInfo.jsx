@@ -1,7 +1,7 @@
 import React from 'react'
 import ErrorMessage from './ErrorMessage'
 
-const LocationInfo = ({ dimension, showError, getDataDimension }) => {
+const LocationInfo = ({ dimension, showError, getDataDimension, errorMsg }) => {
 
   const handlePrev = () => {
     getDataDimension(dimension.id - 1)
@@ -28,11 +28,12 @@ const LocationInfo = ({ dimension, showError, getDataDimension }) => {
       return ""
     }
   }
+  console.log(errorMsg)
 
   return (
     <article className='dimension__info'>
       {
-        showError ? <ErrorMessage /> : (
+        showError ? <ErrorMessage errorMsg={errorMsg} /> : (
           <>
             <div className='dimension__header--container'>
               <div className={`btn__container ${hiddenPrev()}`}>

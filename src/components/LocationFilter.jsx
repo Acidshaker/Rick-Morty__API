@@ -30,9 +30,6 @@ const LocationFilter = ({ locationName, getNewLocation }) => {
     if (!locationName) {
       return "hidden__list"
     }
-    else if ((locationsOptions?.some(locationOption => locationOption.name === locationName))) {
-      return "hidden__list"
-    }
     else {
       return ""
     }
@@ -44,9 +41,10 @@ const LocationFilter = ({ locationName, getNewLocation }) => {
         {
           locationsOptions?.map(locationOption => (
             <li className={classValue()} key={locationOption.url} onClick={
-              () => {
+              (e) => {
                 getNewLocation(locationOption.url, locationOption.name)
                 setLocationsOptions()
+                e.target.parentNode.classList.add("hidden__list")
               }}>{locationOption.name}</li>
           ))
         }

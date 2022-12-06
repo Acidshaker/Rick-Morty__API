@@ -9,6 +9,4 @@ const Loader = () => {
   )
 }
 
-// https://i.postimg.cc/g0LNDfmC/loading.png
-
 export default Loader
