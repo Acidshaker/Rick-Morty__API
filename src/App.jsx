@@ -27,6 +27,10 @@ function App() {
   // Estado para obtener la cancion actual
   const [songName, setSongName] = useState("Evil Morty Song")
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const [lastPage, setLastPage] = useState(1)
+  const [residentsFilter, setResidentsFilter] = useState([])
+
   // funcion para obtener un numero aleatorio por defecto del 1-126
 
   const randomDimension = getRandomNumber()
@@ -128,6 +132,34 @@ function App() {
     setLocationName(event.target.value)
   }
 
+  const RESIDENTS_PER_PAGE = 12
+
+  const getAllPages = () => {
+    const arrayPages = []
+    for (let i = 1; i <= lastPage; i++) {
+      arrayPages.push(i)
+    }
+    return arrayPages
+  }
+
+  useEffect(() => {
+    if (dimension) {
+      const qtyResidents = dimension.residents.length
+      const qtyPages = Math.ceil(qtyResidents / RESIDENTS_PER_PAGE)
+      setLastPage(qtyPages)
+      setCurrentPage(1)
+    }
+
+  }, [dimension])
+
+
+  useEffect(() => {
+    const lastResidentCut = currentPage * RESIDENTS_PER_PAGE
+    const firstResidentCut = lastResidentCut - RESIDENTS_PER_PAGE
+    const newResidentsFilter = dimension?.residents.slice(firstResidentCut, lastResidentCut)
+    setResidentsFilter(newResidentsFilter)
+  }, [currentPage, dimension])
+
 
   const showSongCurrently = () => {
     if (currentlySong == 0) {
@@ -211,9 +243,7 @@ function App() {
                 <i className='bx bx-pause media__pause media__hidden' onClick={handleMediaStop} ></i>
                 <i className='bx bx-skip-next media__next' onClick={handleNextPlay} ></i>
               </div>
-              <div className='song__name--container'>
-                <p className='song__name' >{songName}</p>
-              </div>
+              <p className='song__name' >{songName}</p>
             </div>
             <audio className='audio__tag' src={arrayMusic[currentlySong]} type="audio/mp3"></audio>
             <div className='form__container'>
@@ -230,12 +260,24 @@ function App() {
 
             <section className='cards__container'>
               {
-                !showError ? loader ? <Loader /> : (dimension?.residents.length ? dimension?.residents.map(urlResident => <ResidentCard key={urlResident} urlResident={urlResident} />) : <NotPopulation />) : ""
+                !showError ? loader ? <Loader /> : (dimension?.residents.length ? residentsFilter?.map(urlResident => <ResidentCard key={urlResident} urlResident={urlResident} />) : <NotPopulation />) : ""
               }
             </section>
           </>
         ) : <div className='flex__container'> <Loader /> </div>
+
       }
+
+      <ul className='page__list--container'>
+
+        {
+          getAllPages().map(page => (
+            <li className={`page__list--item ${currentPage == page ? "active__page" : ""}`} onClick={() => { setCurrentPage(page) }} key={page}>{page}</li>
+          ))
+        }
+
+      </ul>
+
 
     </div>
   )
