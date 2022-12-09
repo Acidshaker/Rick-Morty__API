@@ -263,20 +263,27 @@ function App() {
                 !showError ? loader ? <Loader /> : (dimension?.residents.length ? residentsFilter?.map(urlResident => <ResidentCard key={urlResident} urlResident={urlResident} />) : <NotPopulation />) : ""
               }
             </section>
+
+            {
+              (dimension?.residents.length >= 13) ? (
+                <ul className='page__list--container'>
+
+                  {
+                    getAllPages().map(page => (
+                      <li className={`page__list--item ${currentPage == page ? "active__page" : ""}`} onClick={() => { setCurrentPage(page) }} key={page}>{page}</li>
+                    ))
+                  }
+
+                </ul>
+              ) : ""
+            }
+
+
+
           </>
         ) : <div className='flex__container'> <Loader /> </div>
 
       }
-
-      <ul className='page__list--container'>
-
-        {
-          getAllPages().map(page => (
-            <li className={`page__list--item ${currentPage == page ? "active__page" : ""}`} onClick={() => { setCurrentPage(page) }} key={page}>{page}</li>
-          ))
-        }
-
-      </ul>
 
 
     </div>
